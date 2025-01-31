@@ -110,7 +110,7 @@ function SocialLink({
   )
 }
 
-function Newsletter() {
+/* function Newsletter() {
   return (
     <form
       action="/thank-you"
@@ -137,7 +137,7 @@ function Newsletter() {
       </div>
     </form>
   )
-}
+} */
 
 interface Role {
   company: string
@@ -310,7 +310,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
+            {/* <Newsletter /> */}
             <Resume />
           </div>
         </div>
