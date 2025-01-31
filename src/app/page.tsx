@@ -11,10 +11,10 @@ import {
   LinkedInIcon,
   XIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
+import logoEnerjisa from '@/images/logos/enerjisa.svg'
+import logoRulta from '@/images/logos/rulta.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
+import logoOrion from '@/images/logos/orion.svg'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -143,8 +143,8 @@ interface Role {
   company: string
   title: string
   logo: ImageProps['src']
-  start: string | { label: string; dateTime: string }
-  end: string | { label: string; dateTime: string }
+  start: string | { label: string; dateTime: string; month: string }
+  end: string | { label: string; dateTime: string; month: string }
 }
 
 function Role({ role }: { role: Role }) {
@@ -152,9 +152,11 @@ function Role({ role }: { role: Role }) {
     typeof role.start === 'string' ? role.start : role.start.label
   let startDate =
     typeof role.start === 'string' ? role.start : role.start.dateTime
+  let startMonth = typeof role.start === 'string' ? '' : role.start.month
 
   let endLabel = typeof role.end === 'string' ? role.end : role.end.label
   let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
+  let endMonth = typeof role.end === 'string' ? '' : role.end.month
 
   return (
     <li className="flex gap-4">
@@ -175,9 +177,15 @@ function Role({ role }: { role: Role }) {
           className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
           aria-label={`${startLabel} until ${endLabel}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
+          <time dateTime={startDate}>
+            {startMonth && `${startMonth} `}
+            {startLabel}
+          </time>{' '}
           <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
+          <time dateTime={endDate}>
+            {endMonth && `${endMonth} `}
+            {endLabel}
+          </time>
         </dd>
       </dl>
     </li>
@@ -190,30 +198,35 @@ function Resume() {
       company: 'Planetaria',
       title: 'CEO',
       logo: logoPlanetaria,
-      start: '2019',
+      start: {
+        label: '2019',
+        dateTime: '2019',
+        month: 'January',
+      },
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear().toString(),
+        month: '',
       },
     },
     {
-      company: 'Airbnb',
+      company: 'Enerjisa Uretim',
       title: 'Product Designer',
-      logo: logoAirbnb,
+      logo: logoEnerjisa,
       start: '2014',
       end: '2019',
     },
     {
-      company: 'Facebook',
+      company: 'Rulta',
       title: 'iOS Software Engineer',
-      logo: logoFacebook,
+      logo: logoRulta,
       start: '2011',
       end: '2014',
     },
     {
-      company: 'Starbucks',
+      company: 'Orion Innovation',
       title: 'Shift Supervisor',
-      logo: logoStarbucks,
+      logo: logoOrion,
       start: '2008',
       end: '2011',
     },
